@@ -8,7 +8,6 @@ import java.util.Scanner;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 2ndyrGroupC
@@ -20,21 +19,21 @@ public class Crud {
     static final String USER = "root";
     static final String PASS = "";
     Registration r = new Registration();
-    
+
     private Connection connect() throws ClassNotFoundException {
         Connection conn = null;
         try {
-            Class.forName(JDBC_DRIVER); 
+            Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return conn;
     }
-    
-    public void insertRegisterInfo(String[] list) throws ClassNotFoundException { 
-       
-        String sql = "INSERT INTO users VALUES (id,'" + list[0] + "','" + list[1] + "','"+list[2]+"','"+list[3]+"','"+list[4]+"')";
+
+    public void insertRegisterInfo(String[] list) throws ClassNotFoundException {
+
+        String sql = "INSERT INTO users VALUES (id,'" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "')";
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
@@ -43,33 +42,24 @@ public class Crud {
             System.out.println(e.getMessage());
         }
     }
-    public boolean isPresent(String username,String password) throws ClassNotFoundException{
-        boolean ans=false;
-         String sql = "SELECT * FROM `users`";
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeQuery();
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                String email=rs.getString("email").trim();
-                String pass=rs.getString("password").trim();
-                if(email.equals(username)){
-                    if(pass.equals(password)){                
-                        ans=true;
-                        break;
-                    }
-                }
+    public boolean validate_login(String username, String password) {
+        try {
+            // MySQL database connection
+            Connection conn = this.connect();
+            PreparedStatement pst = conn.prepareStatement("Select * from users where email=? and password=?");
+            pst.setString(1, username);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
             }
-        } catch (SQLException e) {
-          
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        System.out.println(ans);
-        return ans;
-    
     }
-    
 
+   
 }
-    
-

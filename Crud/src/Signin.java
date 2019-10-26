@@ -137,15 +137,11 @@ public class Signin extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
              // TODO add your handling code here:
             Crud crud=new Crud();
-        try {
-            if(crud.isPresent(Username.getText(),password.getText())){
+            if(crud.validate_login(Username.getText().trim(),password.getText().trim())){
                 JOptionPane.showMessageDialog(null, "LogIn Sucessful");
             }else{
                 JOptionPane.showMessageDialog(null, "Invalid LogIn "+Username.getText()+" "+password.getText());
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }//GEN-LAST:event_loginActionPerformed
 
