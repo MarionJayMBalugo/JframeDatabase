@@ -1,3 +1,8 @@
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -70,6 +75,11 @@ public class Signin extends javax.swing.JFrame {
                 UsernameMouseClicked(evt);
             }
         });
+        Username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,9 +94,8 @@ public class Signin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(password)
                     .addComponent(Username)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(login, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Register, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Register, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,8 +135,17 @@ public class Signin extends javax.swing.JFrame {
     }//GEN-LAST:event_loginMouseClicked
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
-        
+             // TODO add your handling code here:
+            Crud crud=new Crud();
+        try {
+            if(crud.isPresent(Username.getText(),password.getText())){
+                JOptionPane.showMessageDialog(null, "LogIn Sucessful");
+            }else{
+                JOptionPane.showMessageDialog(null, "Invalid LogIn "+Username.getText()+" "+password.getText());
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Signin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_loginActionPerformed
 
@@ -149,6 +167,10 @@ public class Signin extends javax.swing.JFrame {
           String orig= password.getText();
             password.setText(orig);
     }//GEN-LAST:event_passwordMouseClicked
+
+    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameActionPerformed
 
     /**
      * @param args the command line arguments
