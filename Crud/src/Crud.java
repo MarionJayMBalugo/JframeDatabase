@@ -1,6 +1,15 @@
 
+
+
+
+
+
+
+
 import static java.lang.Integer.parseInt;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -59,6 +68,24 @@ public class Crud {
             e.printStackTrace();
             return false;
         }
+    }public ArrayList Retrieve() throws ClassNotFoundException, SQLException{
+        ArrayList<ArrayList> tempList = new ArrayList();
+        Connection conn = this.connect();
+         PreparedStatement pst = conn.prepareStatement("Select * from users");
+         ResultSet rs = pst.executeQuery();
+         while(rs.next()){
+              int id2 = rs.getInt("id");
+              String fname=rs.getString("firstname");
+              String mname=rs.getString("middlename");
+              String last=rs.getString("lastname");
+              String e =rs.getString("email");
+              String pass=rs.getString("password");
+              tempList.add(new ArrayList<String>(Arrays.asList(String.valueOf(id2), fname, mname, last, e,pass)));
+              
+         }
+            System.out.println(tempList.toString());
+            return tempList;
+         
     }
 
    

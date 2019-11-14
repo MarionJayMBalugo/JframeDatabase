@@ -1,3 +1,8 @@
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +18,10 @@ public class User extends javax.swing.JFrame {
     /**
      * Creates new form User
      */
-    public User() {
+    public User() throws ClassNotFoundException, SQLException {
         initComponents();
+        Crud c=new Crud();
+        c.Retrieve();
     }
 
     /**
@@ -113,7 +120,13 @@ public class User extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new User().setVisible(true);
+                try {
+                    new User().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

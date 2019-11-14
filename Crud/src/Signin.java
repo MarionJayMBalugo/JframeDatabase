@@ -139,6 +139,10 @@ public class Signin extends javax.swing.JFrame {
             Crud crud=new Crud();
             if(crud.validate_login(Username.getText().trim(),password.getText().trim())){
                 JOptionPane.showMessageDialog(null, "LogIn Sucessful");
+             User u= new User();
+             u.setVisible(true);
+                this.setVisible(false);
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Invalid LogIn "+Username.getText()+" "+password.getText());
             }

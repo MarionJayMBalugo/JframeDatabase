@@ -247,12 +247,12 @@ public class Registration extends javax.swing.JFrame {
         Crud crud=new Crud();
         Signin sign = new Signin();
 
-        String fname = firstname.getText();
-        String mname = Middlename.getText();
-        String lname = lastname.getText();
-        String mail = email.getText();
-        String paz = password.getText();
-        String repaz = repass.getText();
+        String fname = firstname.getText().trim();
+        String mname = Middlename.getText().trim();
+        String lname = lastname.getText().trim();
+        String mail = email.getText().trim();
+        String paz = password.getText().trim();
+        String repaz = repass.getText().trim();
         
         
         String[] List = new String[]{fname, mname, lname, mail, paz, repaz};
